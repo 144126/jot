@@ -11,6 +11,7 @@
 	},
 	"workers_dev": true,
 	"preview_urls": true,
+	"ai": { "binding": "AI" },
 	"vars": {
 		"JOT_STT_URL": "https://stt.apexlinks.org/",
 		"JOT_LLM_URL": "https://openrouter.ai/api/v1/chat/completions",
