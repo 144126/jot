@@ -40,7 +40,7 @@ export class Mic {
 			audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true }
 		});
 		this.ctx = new AudioContext({ sampleRate: SAMPLE_RATE });
-		await this.ctx.audioWorklet.addModule(worklet_url);
+		await this.ctx.audioWorklet.addModule(worklet());
 		this.source = this.ctx.createMediaStreamSource(this.stream);
 		this.node = new AudioWorkletNode(this.ctx, 'jot-capture');
 		this.node.port.onmessage = (e) => this.on_frame(e.data as Float32Array);
@@ -103,10 +103,11 @@ export class Mic {
 }
 
 // the capture processor, inlined as a blob so there is no second file to ship
-const worklet_url = URL.createObjectURL(
-	new Blob(
-		[
-			`class JotCapture extends AudioWorkletProcessor {
+function worklet(): string {
+	return URL.createObjectURL(
+		new Blob(
+			[
+				`class JotCapture extends AudioWorkletProcessor {
   process(inputs) {
     const ch = inputs[0][0];
     if (ch) this.port.postMessage(new Float32Array(ch));
@@ -114,7 +115,8 @@ const worklet_url = URL.createObjectURL(
   }
 }
 registerProcessor('jot-capture', JotCapture);`
-		],
-		{ type: 'application/javascript' }
-	)
-);
+			],
+			{ type: 'application/javascript' }
+		)
+	);
+}
