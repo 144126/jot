@@ -18,7 +18,12 @@
 			body: encode_wav(pcm, SAMPLE_RATE),
 			signal
 		});
-		return r.ok ? (await r.text()).trim() : '';
+		if (!r.ok) {
+			error = (await r.text()).trim() || `stt ${r.status}`;
+			return '';
+		}
+		error = '';
+		return (await r.text()).trim();
 	});
 	stt.on_live = (t) => {
 		if (speaking) live = t;

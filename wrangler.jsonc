@@ -12,6 +12,7 @@
 	"workers_dev": true,
 	"preview_urls": true,
 	"vars": {
+		"JOT_STT_URL": "https://stt.apexlinks.org/",
 		"JOT_LLM_URL": "https://openrouter.ai/api/v1/chat/completions",
 		"JOT_LLM_MODEL": "openai/gpt-4o-mini"
 	}
