@@ -15,6 +15,7 @@
 	const stt = new Stt(async (pcm, signal) => {
 		const r = await fetch('/api/transcribe', {
 			method: 'POST',
+			headers: { 'content-type': 'application/octet-stream' },
 			body: encode_wav(pcm, SAMPLE_RATE),
 			signal
 		});
