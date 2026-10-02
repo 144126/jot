@@ -1,0 +1,18 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "jot",
+	"account_id": "9bdf8703c380fa82142864bf5d99a2d7",
+	"compatibility_date": "2026-10-02",
+	"compatibility_flags": ["nodejs_als"],
+	"main": ".svelte-kit/cloudflare/_worker.js",
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".svelte-kit/cloudflare"
+	},
+	"workers_dev": true,
+	"preview_urls": true,
+	"vars": {
+		"JOT_LLM_URL": "https://openrouter.ai/api/v1/chat/completions",
+		"JOT_LLM_MODEL": "openai/gpt-4o-mini"
+	}
+}
